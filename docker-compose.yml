@@ -1,10 +1,12 @@
-version: "3.8"
+#version: "3.8"
 
 services:
   mysql:
-    user: "${UID}:${GID}" 
+    #user: "${UID}:${GID}" 
     image: mysql:5.7
     container_name: mysql
+    ports:
+      - "3307:3306"
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: devops
@@ -24,7 +26,8 @@ services:
     #   start_period: 60s
 
   flask-app:
-    image: trainwithshubham/two-tier-flask-app:latest
+    build: .
+    image: two-tier-flask-app:latest
     container_name: flask-app
     ports:
       - "5000:5000"
